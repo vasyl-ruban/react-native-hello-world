@@ -9,12 +9,14 @@ import Home from "./Screens/Home";
 import Heroes from "./Screens/Heroes";
 import Hero from "./Screens/Hero";
 import Live from "./Screens/Live";
+import SearchPlayer from "./Screens/SearchPlayer";
 
 const AppNavigator = StackNavigator({
   Home: { screen: Home },
   Heroes: {screen: Heroes},
   Hero: {screen: Hero},
-  Live: {screen: Live}
+  Live: {screen: Live},
+  SearchPlayer: {screen: SearchPlayer}
 }, {
   initialRouteName: "Home",
   headerMode: "none",

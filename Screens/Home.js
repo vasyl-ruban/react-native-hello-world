@@ -15,6 +15,9 @@ export default class Home extends React.Component {
 
         <Content>
           <Text>Home screen</Text>
+          <Button onPress={() => navigate("SearchPlayer")}>
+            <Text>Search player</Text>
+          </Button>
 
         </Content>
         <Footer>
