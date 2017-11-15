@@ -5,7 +5,7 @@ import {
 import React from 'react';
 import {StackNavigator} from "react-navigation";
 
-import Home from './Screens/Home';
+import Home from "./Screens/Home";
 import Heroes from "./Screens/Heroes";
 import Hero from "./Screens/Hero";
 import Live from "./Screens/Live";
@@ -40,7 +40,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    return this.state.fontsLoaded ? <AppNavigator/> : null
+    return this.state.fontsLoaded ? <AppNavigator/> : null;
   }
 }
 

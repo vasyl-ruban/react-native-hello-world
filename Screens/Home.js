@@ -12,8 +12,10 @@ export default class Home extends React.Component {
     return (
       <Container>
         <Header />
+
         <Content>
           <Text>Home screen</Text>
+
         </Content>
         <Footer>
           <FooterTab>

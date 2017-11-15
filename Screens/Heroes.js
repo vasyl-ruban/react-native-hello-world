@@ -7,7 +7,7 @@ import {
 
 const HeroListView = (navigate) => (hero) => {
   return (
-    <ListItem key={hero.id} style={{paddingLeft: 10}} onPress={() => {navigate('Hero', {hero: hero})}}>
+    <ListItem key={hero.id} style={{paddingLeft: 10, marginLeft: 0}} onPress={() => {navigate('Hero', {hero: hero})}}>
       <Thumbnail square size={80} source={{uri: "http://api.opendota.com" + hero.img}}/>
       <Body>
         <Text>{hero.localized_name}</Text>

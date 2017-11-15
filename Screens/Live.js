@@ -6,7 +6,7 @@ import {
   ListItem,
   Right,
   Spinner,
-  Text, Thumbnail
+  Text, Thumbnail, View
 } from "native-base";
 
 const removeDuplicates = (lives) => {
@@ -35,11 +35,11 @@ export default class Live extends React.Component {
       .then((response) => response.json())
       .then((response) => {
         this.setState(prevState => {
+          response.sort((a, b) => b.spectators - a.spectators);
           response = removeDuplicates(response);
           response = response.filter((live) => {
             return live.spectators > 0;
           });
-          response.sort((a, b) => b.spectators - a.spectators);
 
           prevState.live = response;
           return prevState;
@@ -88,22 +88,138 @@ export default class Live extends React.Component {
   }
 }
 
-const playersHero = (heroes) => (player) => {
+const playerView = (heroes) => (isRadiant) =>  (player) => {
   let hero = heroes.filter(hero => hero.id === player.hero_id)[0];
 
-  return hero ? <Thumbnail square source={{uri: 'http://api.opendota.com' + hero.icon}}/> : null;
+
+  return hero ? (    <ListItem key={player.account_id} style={{height: 50}}>
+      {
+        !isRadiant
+          ? (
+            <Left style={{width: 25}}>
+              <Thumbnail square
+                         source={{uri: 'http://api.opendota.com' + hero.icon}}
+                         style={{width: 25, height: 25}}/>
+            </Left>
+          )
+        : null
+      }
+
+      {
+        player.is_pro
+          ? (
+            <Body style={{width: 100, overflow: 'hidden'}}>
+              <Text style={{fontSize: 12}}>
+                {player.name}
+              </Text>
+              <Text style={{fontSize: 12}}>
+                @{player.team_tag}
+              </Text>
+            </Body>
+          )
+          : (
+            <Body style={{width: 100, overflow: 'hidden'}}>
+              <Text style={{fontSize: 12}}>-</Text>
+            </Body>
+          )
+      }
+      {
+        isRadiant
+          ? (
+            <Right style={{width: 25}}>
+              <Thumbnail square
+                         source={{uri: 'http://api.opendota.com' + hero.icon}}
+                         style={{width: 25, height: 25}}/>
+            </Right>
+          )
+          : null
+      }
+    </ListItem>
+  ) : null;
 };
 
-const liveView = (heroes) => (live, index) => {
-  let heroesView = live.players.map(playersHero(heroes));
+const playersView = (heroes) => (players) => {
+  let radiantPlayers = players.slice(0, 5);
+  let direPlayers = players.slice(5, 10);
+  let radiantPlayersView = radiantPlayers.map(playerView(heroes)(true));
+  let direPlayersView = direPlayers.map(playerView(heroes)(false));
   return (
-    <Card key={index}>
+    <CardItem>
+      <Grid>
+        <Col>
+          <List>
+            {radiantPlayersView}
+          </List>
+        </Col>
+        <Col>
+          <List>
+            {direPlayersView}
+          </List>
+        </Col>
+      </Grid>
+    </CardItem>
+  );
+};
+
+const liveView = (heroes) => (live) => {
+  return (
+    <Card key={live.lobby_id}>
+          {/*versus (only for pro games)*/}
+          {/*{*/}
+            {/*live.team_name_radiant && live.team_name_dire*/}
+              {/*? (*/}
+                  {/*<CardItem>*/}
+                    {/*<Grid>*/}
+                      {/*<Col style={{textAlign: 'center'}}>*/}
+                        {/*{live.team_name_radiant}*/}
+                      {/*</Col>*/}
+                      {/*<Col style={{textAlign: 'center'}}>*/}
+                        {/*{live.team_name_dire}*/}
+                      {/*</Col>*/}
+                    {/*</Grid>*/}
+                  {/*</CardItem>*/}
+                {/*)*/}
+              {/*: null*/}
+          {/*}*/}
+
+      {/*time*/}
       <CardItem>
-          <Text>{live.team_name_radiant}</Text>
-          <Text>{live.team_name_dire}</Text>
-          <Text>{live.spectators}</Text>
-          {heroesView}
+        <Body>
+          <H3 style={{alignSelf: 'center'}}>
+            {live.radiant_score}:{live.dire_score}
+          </H3>
+          <Text style={{alignSelf: 'center', fontSize: 12}}>
+            {(live.game_time / 60).toFixed(0)}:{("0" + (live.game_time % 60)).slice(-2)}
+          </Text>
+          <Text style={{alignSelf: 'center', fontSize: 12}}>
+            {live.spectators} spectators / {live.average_mmr} avg mmr
+          </Text>
+        </Body>
       </CardItem>
+
+     {/*score */}
+      <CardItem>
+        <Grid>
+          <Col>
+            <H3 style={{textAlign: 'left', paddingLeft: 20}}>{live.radiant_score}</H3>
+            {
+              live.radiant_lead > 0
+                ? <Text style={{textAlign: 'left', color: 'green', paddingLeft: 20, fontSize: 12}}>+{live.radiant_lead}</Text>
+                : null
+            }
+          </Col>
+          <Col>
+            <H3 style={{textAlign: 'right', paddingRight: 20}}>{live.dire_score}</H3>
+            {
+              live.radiant_lead < 0
+                ? <Text style={{textAlign: 'right', color: 'green', paddingRight: 20, fontSize: 12}}>+{-live.radiant_lead}</Text>
+                : null
+            }
+          </Col>
+        </Grid>
+      </CardItem>
+
+      {playersView(heroes)(live.players)}
     </Card>
   );
 };
