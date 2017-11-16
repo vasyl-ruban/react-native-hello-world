@@ -5,20 +5,20 @@ import {
 import React from 'react';
 import {StackNavigator} from "react-navigation";
 
-import Home from "./Screens/Home";
 import Heroes from "./Screens/Heroes";
 import Hero from "./Screens/Hero";
 import Live from "./Screens/Live";
 import SearchPlayer from "./Screens/SearchPlayer";
+import Player from "./Screens/Player";
 
 const AppNavigator = StackNavigator({
-  Home: { screen: Home },
   Heroes: {screen: Heroes},
   Hero: {screen: Hero},
   Live: {screen: Live},
-  SearchPlayer: {screen: SearchPlayer}
+  SearchPlayer: {screen: SearchPlayer},
+  Player: {screen: Player}
 }, {
-  initialRouteName: "Home",
+  initialRouteName: "SearchPlayer",
   headerMode: "none",
 });
 

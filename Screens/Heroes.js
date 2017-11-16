@@ -1,24 +1,8 @@
 import React from 'react';
-import {
-  Body,
-  Button, Container, Content, Footer, FooterTab, Header, Icon, Input, Item, List, ListItem, Right, Spinner,
-  Text, Thumbnail
-} from "native-base";
+import { Body, Button, Card, CardItem, Col, Container, Content, Footer, FooterTab, Grid, H1, H3, Header, Icon, Input, Item, Left, List, ListItem, Right, Spinner, Text, Thumbnail, View } from "native-base";
+import Layout from './Layout';
+import HeroList from '../Components/Hero/HeroList';
 
-const HeroListView = (navigate) => (hero) => {
-  return (
-    <ListItem key={hero.id} style={{paddingLeft: 10, marginLeft: 0}} onPress={() => {navigate('Hero', {hero: hero})}}>
-      <Thumbnail square size={80} source={{uri: "http://api.opendota.com" + hero.img}}/>
-      <Body>
-        <Text>{hero.localized_name}</Text>
-        <Text note>{hero.roles.join(', ')}</Text>
-      </Body>
-      <Right>
-        <Icon name="arrow-forward" />
-      </Right>
-    </ListItem>
-  );
-};
 
 const isMatchHeroName = (searchText) => (hero) => {
   if (!searchText) return true;
@@ -46,7 +30,8 @@ export default class Heroes extends React.Component {
           return prevState;
         })
       });
-      this.updateSearch = this.updateSearch.bind(this);
+
+    this.updateSearch = this.updateSearch.bind(this);
   }
 
   updateSearch(text) {
@@ -57,48 +42,18 @@ export default class Heroes extends React.Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
-    const heroListView =
-      this.state.heroes
-        .filter(isMatchHeroName(this.state.searchText))
-        .map(HeroListView(navigate));
+    let { navigate } = this.props.navigation;
+    let heroList = this.state.heroes.filter(isMatchHeroName(this.state.searchText));
 
     return (
-      <Container>
-        <Header />
+      <Layout navigate={navigate}>
+        <Item>
+          <Icon active name='search' />
+          <Input placeholder='Search hero' onChangeText={this.updateSearch}/>
+        </Item>
 
-        <Content>
-          <Item>
-            <Icon active name='search' />
-            <Input placeholder='Search hero' onChangeText={this.updateSearch}/>
-          </Item>
-
-          <List>
-            {
-              this.state.heroes.length
-              ? heroListView
-              : <Spinner />
-            }
-          </List>
-        </Content>
-
-        <Footer>
-          <FooterTab>
-            <Button onPress={() => navigate('Home')}>
-              <Text>Home</Text>
-            </Button>
-            <Button active onPress={() => navigate('Heroes')}>
-              <Text>Heroes</Text>
-            </Button>
-            <Button onPress={() => navigate('Live')}>
-              <Text>Live</Text>
-            </Button>
-            <Button>
-              <Text>Teams</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
-      </Container>
+        <HeroList navigate={navigate} heroes={heroList} />
+      </Layout>
     );
   }
 }
