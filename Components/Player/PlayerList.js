@@ -6,7 +6,8 @@ export default class PlayerList extends React.Component {
   render() {
     let players = this.props.players;
     let navigate = this.props.navigate;
-    let playerViews = players.map((player) => <PlayerListItem player={player} navigate={navigate} key={player.account_id} />);
+    let playerPressHandler = this.props.playerPressHandler;
+    let playerViews = players.map((player) => <PlayerListItem player={player} navigate={navigate} playerPressHandler={playerPressHandler} key={player.account_id} />);
 
     return (
       <List>

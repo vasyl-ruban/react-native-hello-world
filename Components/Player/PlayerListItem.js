@@ -3,16 +3,17 @@ import { Body, Button, Card, CardItem, Col, Container, Content, Footer, FooterTa
 
 export default class PlayerListItem extends React.Component {
   render() {
-    const navigate = this.props.navigate;
-    const player = this.props.player;
-    const lastMatch = (new Date(player.last_match_time)).toString();
+    let navigate = this.props.navigate;
+    let player = this.props.player;
+    let playerPressHandler = this.props.playerPressHandler;
+    let lastMatch = (new Date(player.last_match_time)).toString();
 
     return (
-      <ListItem key={player.account_id} style={{marginLeft: 0}} onPress={() => navigate('Player', {playerId: player.account_id})}>
+      <ListItem key={player.account_id} style={{marginLeft: 0}} onPress={() => playerPressHandler(player)}>
         <Thumbnail square size={80} source={{ uri: player.avatarfull }} />
         <Body>
         <Text>{player.personaname}</Text>
-        <Text note>{lastMatch}</Text>
+        <Text note>{lastMatch}/{player.account_id}</Text>
         </Body>
         <Right>
           <Icon name="arrow-forward" />
