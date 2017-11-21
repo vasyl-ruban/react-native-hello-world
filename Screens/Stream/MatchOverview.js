@@ -26,6 +26,13 @@ export default class MatchList extends React.Component {
     const {navigate} = this.props.navigation;
     return (
       <Layout navigate={navigate}>
+        <Header>
+          <Left>
+            <Icon name="arrow-back" style={{color: 'white'}} onPress={() => {this.props.navigation.goBack()}}/>
+          </Left>
+          <Body />
+          <Right />
+        </Header>
         {this.state.streams.length ? streamsView(navigate)(this.state.streams) : <Spinner />}
       </Layout>
     );

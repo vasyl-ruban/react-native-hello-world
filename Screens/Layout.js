@@ -8,6 +8,7 @@ import {
   Spinner,
   Text, Thumbnail, View
 } from "native-base";
+import {Platform} from "react-native";
 
 export default class Layout extends React.Component {
   render() {
@@ -15,9 +16,7 @@ export default class Layout extends React.Component {
     const activeTab = this.props.activeTab;
     const isCollapsed = this.props.isCollapsed;
     return (
-      <Container >
-        <Header style={isCollapsed ? {width: 0, height: 0} : {height: 25} } />
-
+      <Container>
         <Content>
           {this.props.children}
         </Content>

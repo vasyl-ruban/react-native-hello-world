@@ -29,6 +29,13 @@ export default class Stream extends React.Component {
     let {width, height} = Dimensions.get('screen');
     return (
       <Layout navigate={navigate} isCollapsed={this.state.isLandscape}>
+        <Header>
+          <Left>
+            <Icon name="arrow-back" style={{color: 'white'}} onPress={() => {this.props.navigation.goBack()}}/>
+          </Left>
+          <Body />
+          <Right />
+        </Header>
         <WebView
           source={{uri: this.state.streamLink}}
           allowfullscreen="false"

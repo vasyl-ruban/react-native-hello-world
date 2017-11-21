@@ -1,7 +1,7 @@
 import React from 'react';
 import { AsyncStorage, ListView } from 'react-native'
 import { Body, Button, Card, CardItem, Col, Container, Content, Footer, FooterTab, Grid, H1, H3, Header, Icon, Input, Item, Left, List, ListItem, Right, Spinner, Text, Thumbnail, View, Separator, SwipeRow } from "native-base";
-import Layout from './Layout';
+import Layout from '../Layout';
 
 export default class SearchPlayer extends React.Component {
   constructor(props) {
@@ -61,6 +61,13 @@ export default class SearchPlayer extends React.Component {
 
     return (
       <Layout navigate={navigate} activeTab="SearchPlayer">
+        <Header>
+          <Left>
+            <Icon name="menu" style={{color: 'white'}} />
+          </Left>
+          <Body />
+          <Right />
+        </Header>
         <Item>
           <Icon name="ios-people" style={{marginLeft: 15}}/>
           <Input placeholder="Search player" onChangeText={this.queryStringUpdate}/>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Body, Button, Card, CardItem, Col, Container, Content, Footer, FooterTab, Grid, H1, H3, Header, Icon, Input, Item, Left, List, ListItem, Right, Spinner, Text, Thumbnail, View } from "native-base";
-import Layout from './Layout';
+import Layout from '../Layout';
 
 export default class Player extends React.Component {
   constructor(props) {
@@ -76,6 +76,13 @@ export default class Player extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <Layout navigate={navigate}>
+        <Header>
+          <Left>
+            <Icon name="arrow-back" style={{color: 'white'}} onPress={() => {this.props.navigation.goBack()}}/>
+          </Left>
+          <Body />
+          <Right />
+        </Header>
           {!this.state.player ? <Spinner /> : null}
           {this.state.player ? this.playerView() : null}
           {(this.state.heroesStats.length && this.state.heroes.length) ? heroesStatsView(this.state.heroes)(this.state.heroesStats) : null}

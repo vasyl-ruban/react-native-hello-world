@@ -8,11 +8,10 @@ export default class Drawer extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    console.log(this.props.navigation);
     return (
       <View style={{marginTop: 50}}>
         <List>
-          <ListItem button noBorder onPress={() => navigate('SearchPlayer')}>
+          <ListItem button noBorder onPress={() => navigate('PlayerModule')}>
             <Left>
               <Icon name="ios-people" />
               <Body>
@@ -21,7 +20,7 @@ export default class Drawer extends React.Component {
             </Left>
           </ListItem>
 
-          <ListItem button noBorder onPress={() => navigate('MatchList')}>
+          <ListItem button noBorder onPress={() => navigate('StreamModule')}>
             <Left>
               <Icon name="easel" />
               <Body>

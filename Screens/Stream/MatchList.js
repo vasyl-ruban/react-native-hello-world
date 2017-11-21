@@ -24,6 +24,13 @@ export default class MatchList extends React.Component {
     const {navigate} = this.props.navigation;
     return (
       <Layout navigate={navigate}>
+        <Header>
+          <Left onPress={() => {}}>
+            <Icon name="menu" style={{color: 'white'}} />
+          </Left>
+          <Body />
+          <Right />
+        </Header>
         {this.state.matchList.length ? matchesView(navigate)(this.state.matchList) : <Spinner />}
       </Layout>
     );
@@ -61,7 +68,7 @@ const matchesView = (navigate) => (matches) => {
 
 const matchView = (navigate) => (match) => {
   return (
-    <ListItem ket={match.matchPage} style={{marginLeft: 0}} onPress={() => {console.log('press');navigate("MatchOverview", {matchPage: match.matchPage})}}>
+    <ListItem ket={match.matchPage} style={{marginLeft: 0}} onPress={() => {navigate("MatchOverview", {matchPage: match.matchPage})}}>
 
       <Body>
         <Text>{match.firstTeamTag} vs. {match.secondTeamTag}</Text>
