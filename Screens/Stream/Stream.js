@@ -31,35 +31,16 @@ export default class Stream extends React.Component {
       <Layout navigate={navigate} isCollapsed={this.state.isLandscape}>
         <WebView
           source={{uri: this.state.streamLink}}
-          allowfullscreen="true"
+          allowfullscreen="false"
           style={{width: width, height: this.state.isLandscape ? height : height/3}}
           height={200}
         />
         <WebView
           source={{uri: this.state.chatLink}}
-          style={{width: width, height: this.state.isLandscape ? 0 : height * 2/3 - 100}}
+          style={{width: width, height: this.state.isLandscape ? 0 : height * 2/3 - 175}}
         />
       </Layout>
     );
   }
 }
 
-const streamsView = (navigate) => (streams) => {
-  let views = streams.map(streamView(navigate));
-  return (
-    <List>
-      <ListItem itemDivider>
-        <Text>Streams</Text>
-      </ListItem>
-      {views}
-    </List>
-  );
-};
-
-const streamView = (navigate) => (stream) => {
-  return (
-    <ListItem style={{marginLeft: 0}} onPress={() => {navigate("Stream", {streamLink: '', chatLink: ''})}}>
-      <Text>{stream.streamerName}</Text>
-    </ListItem>
-  );
-};

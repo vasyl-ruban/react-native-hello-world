@@ -12,7 +12,7 @@ export default class MatchList extends React.Component {
     };
 
 
-    fetch(`http://192.168.0.105:3000/matches/${this.state.matchPage}/streams`)
+    fetch(`http://188.226.147.71:3000/matches/${this.state.matchPage}/streams`)
       .then((res) => res.json())
       .then((res) => {
         this.setState((prev) => {

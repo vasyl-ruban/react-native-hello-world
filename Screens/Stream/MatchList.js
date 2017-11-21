@@ -10,7 +10,7 @@ export default class MatchList extends React.Component {
       matchList: []
     };
 
-    fetch('http://192.168.0.105:3000/matches')
+    fetch('http://188.226.147.71:3000/matches')
       .then((res) => res.json())
       .then((res) => {
         this.setState((prev) => {
@@ -36,8 +36,8 @@ const matchesView = (navigate) => (matches) => {
   let pastMatches = matches.filter(match => match.isPast);
 
   let liveMatchesView = liveMatches.map(matchView(navigate));
-  let futureMatchesView = futureMatches.map(matchView(navigate));
-  let pastMatchesView = pastMatches.map(matchView(navigate));
+  let futureMatchesView = futureMatches.map(futureMatchView(navigate));
+  let pastMatchesView = pastMatches.map(pastMatchView(navigate));
 
   return (
     <List>
@@ -68,6 +68,36 @@ const matchView = (navigate) => (match) => {
       </Body>
       <Right>
         <Icon name="arrow-forward" />
+      </Right>
+    </ListItem>
+  );
+};
+
+
+const futureMatchView = (navigate) => (match) => {
+  return (
+    <ListItem ket={match.matchPage} style={{marginLeft: 0}}>
+
+      <Body>
+      <Text>{match.firstTeamTag} vs. {match.secondTeamTag}</Text>
+      </Body>
+      <Right>
+        <Text>{match.timeTOStart}</Text>
+      </Right>
+    </ListItem>
+  );
+};
+
+
+const pastMatchView = (navigate) => (match) => {
+  return (
+    <ListItem ket={match.matchPage} style={{marginLeft: 0}} >
+
+      <Body>
+      <Text>{match.firstTeamTag} vs. {match.secondTeamTag}</Text>
+      </Body>
+      <Right>
+        <Text>{match.firstTeamScore} : {match.secondTeamScore}</Text>
       </Right>
     </ListItem>
   );
