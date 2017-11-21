@@ -13,15 +13,16 @@ export default class Layout extends React.Component {
   render() {
     const navigate = this.props.navigate;
     const activeTab = this.props.activeTab;
+    const isCollapsed = this.props.isCollapsed;
     return (
-      <Container>
-        <Header/>
+      <Container >
+        <Header style={isCollapsed ? {width: 0, height: 0} : {} }/>
 
         <Content>
           {this.props.children}
         </Content>
 
-        <Footer>
+        <Footer style={isCollapsed ? {width: 0, height: 0} : {} }>
           <FooterTab>
             <Button active={activeTab === "SearchPlayer"} onPress={() => navigate('SearchPlayer')}>
               <Text>Home</Text>
@@ -32,8 +33,8 @@ export default class Layout extends React.Component {
             <Button active={activeTab === "Live"} onPress={() => navigate('Live')}>
               <Text>Live</Text>
             </Button>
-            <Button active={activeTab === "Teams"}>
-              <Text>Teams</Text>
+            <Button active={activeTab === "MatchList"} onPress={() => navigate('MatchList')}>
+              <Text>Streams</Text>
             </Button>
           </FooterTab>
         </Footer>

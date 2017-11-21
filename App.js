@@ -10,13 +10,19 @@ import Hero from "./Screens/Hero";
 import Live from "./Screens/Live";
 import SearchPlayer from "./Screens/SearchPlayer";
 import Player from "./Screens/Player";
+import MatchList from "./Screens/Stream/MatchList";
+import MatchOverview from "./Screens/Stream/MatchOverview";
+import Stream from "./Screens/Stream/Stream";
 
 const AppNavigator = StackNavigator({
   Heroes: {screen: Heroes},
   Hero: {screen: Hero},
   Live: {screen: Live},
   SearchPlayer: {screen: SearchPlayer},
-  Player: {screen: Player}
+  Player: {screen: Player},
+  MatchList: {screen: MatchList},
+  MatchOverview: {screen: MatchOverview},
+  Stream: {screen: Stream}
 }, {
   initialRouteName: "SearchPlayer",
   headerMode: "none",
