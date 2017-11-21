@@ -16,28 +16,11 @@ export default class Layout extends React.Component {
     const isCollapsed = this.props.isCollapsed;
     return (
       <Container >
-        <Header style={isCollapsed ? {width: 0, height: 0} : {} }/>
+        <Header style={isCollapsed ? {width: 0, height: 0} : {height: 25} } />
 
         <Content>
           {this.props.children}
         </Content>
-
-        <Footer style={isCollapsed ? {width: 0, height: 0} : {} }>
-          <FooterTab>
-            <Button active={activeTab === "SearchPlayer"} onPress={() => navigate('SearchPlayer')}>
-              <Text>Home</Text>
-            </Button>
-            <Button active={activeTab === "Heroes"} onPress={() => navigate('Heroes')}>
-              <Text>Heroes</Text>
-            </Button>
-            <Button active={activeTab === "Live"} onPress={() => navigate('Live')}>
-              <Text>Live</Text>
-            </Button>
-            <Button active={activeTab === "MatchList"} onPress={() => navigate('MatchList')}>
-              <Text>Streams</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
       </Container>
     );
   }

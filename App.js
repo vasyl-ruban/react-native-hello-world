@@ -3,7 +3,7 @@ import {
   Input, Icon, Root
 } from 'native-base';
 import React from 'react';
-import {StackNavigator} from "react-navigation";
+import {DrawerNavigator, StackNavigator} from "react-navigation";
 
 import Heroes from "./Screens/Heroes";
 import Hero from "./Screens/Hero";
@@ -13,19 +13,28 @@ import Player from "./Screens/Player";
 import MatchList from "./Screens/Stream/MatchList";
 import MatchOverview from "./Screens/Stream/MatchOverview";
 import Stream from "./Screens/Stream/Stream";
+import Drawer from "./Components/Drawer";
 
-const AppNavigator = StackNavigator({
+const playerNavigator = StackNavigator({
+  SearchPlayer: {screen: SearchPlayer},
+  Player: {screen: Player},
+}, {
+  initialRouteName: "SearchPlayer",
+  headerMode: "none"
+});
+
+const AppNavigator = DrawerNavigator({
   Heroes: {screen: Heroes},
   Hero: {screen: Hero},
   Live: {screen: Live},
-  SearchPlayer: {screen: SearchPlayer},
-  Player: {screen: Player},
+  Player: {screen: playerNavigator},
   MatchList: {screen: MatchList},
   MatchOverview: {screen: MatchOverview},
   Stream: {screen: Stream}
 }, {
-  initialRouteName: "SearchPlayer",
-  headerMode: "none",
+  initialRouteName: "Player",
+  contentComponent: Drawer,
+  backBehavior: "none"
 });
 
 export default class App extends React.Component {
