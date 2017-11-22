@@ -4,14 +4,30 @@ import { Body, Button, Card, CardItem, Col, Container, Content, Footer, FooterTa
 export default class Drawer extends React.Component {
   constructor(props) {
     super(props);
+
+    const { navigate } = this.props.navigation;
+
+    this.state = {
+      selectedModule: 'PlayerModule',
+      navigate: navigate
+    };
+
+    this.setModule = this.setModule.bind(this);
+  }
+
+  setModule(module) {
+    this.state.navigate(module);
+    this.setState((prev) => {
+      prev.selectedModule = module;
+      return prev;
+    });
   }
 
   render() {
-    const { navigate } = this.props.navigation;
     return (
       <View style={{marginTop: 50}}>
         <List>
-          <ListItem button noBorder onPress={() => navigate('PlayerModule')}>
+          <ListItem itemDivider={this.state.selectedModule === 'PlayerModule'} button noBorder onPress={() => this.setModule('PlayerModule')}>
             <Left>
               <Icon name="ios-people" />
               <Body>
@@ -20,7 +36,7 @@ export default class Drawer extends React.Component {
             </Left>
           </ListItem>
 
-          <ListItem button noBorder onPress={() => navigate('StreamModule')}>
+          <ListItem itemDivider={this.state.selectedModule === 'StreamModule'} button noBorder onPress={() => this.setModule('StreamModule')}>
             <Left>
               <Icon name="easel" />
               <Body>
