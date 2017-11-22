@@ -80,7 +80,7 @@ const playerRow = (heroes) => (player) => {
   let towerDamage = (player.tower_damage / 1000).toFixed(1) + 'k';
   return (
     <ListItem key={player.hero_id}>
-      <Thumbnail square size={80} source={{uri: "http://api.opendota.com" + hero.img}} style={{marginLeft: 15}}/>
+      <Thumbnail square size={80} source={{uri: `http://188.226.147.71:3030/heroes/sb/${player.hero_id}.png`}} style={{marginLeft: 15}}/>
       <Body>
         <Grid>
           <Col>
@@ -92,14 +92,14 @@ const playerRow = (heroes) => (player) => {
           <Col>
             <Grid>
               <Row>
-                <Col><Text>i</Text></Col>
-                <Col><Text>i</Text></Col>
-                <Col><Text>i</Text></Col>
+                <Col><Text><Thumbnail square small source={{uri: 'http://188.226.147.71:3030/items/lg/' + player.item_0 + '.png'}} /></Text></Col>
+                <Col><Text><Thumbnail square small source={{uri: 'http://188.226.147.71:3030/items/lg/' + player.item_1 + '.png'}} /></Text></Col>
+                <Col><Text><Thumbnail square small source={{uri: 'http://188.226.147.71:3030/items/lg/' + player.item_2 + '.png'}} /></Text></Col>
               </Row>
               <Row>
-                <Col><Text>i</Text></Col>
-                <Col><Text>i</Text></Col>
-                <Col><Text>i</Text></Col>
+                <Col><Text><Thumbnail square small source={{uri: 'http://188.226.147.71:3030/items/lg/' + player.item_3 + '.png'}} /></Text></Col>
+                <Col><Text><Thumbnail square small source={{uri: 'http://188.226.147.71:3030/items/lg/' + player.item_4 + '.png'}} /></Text></Col>
+                <Col><Text><Thumbnail square small source={{uri: 'http://188.226.147.71:3030/items/lg/' + player.item_5 + '.png'}} /></Text></Col>
               </Row>
             </Grid>
           </Col>

@@ -25,7 +25,7 @@ class HeroTitle extends React.Component {
     return (
         <CardItem>
           <Left>
-            <Thumbnail source={{uri: "http://api.opendota.com" + hero.img}}/>
+            <Thumbnail source={{uri: `http://188.226.147.71:3030/heroes/sb/${hero.id}.png`}}/>
             <Body>
             <Text>{hero.localized_name}</Text>
             <Text note>{hero.roles.join(', ')}</Text>

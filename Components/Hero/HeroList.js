@@ -25,7 +25,7 @@ class HeroListItem extends React.Component {
 
     return (
       <ListItem key={hero.id} style={{paddingLeft: 10, marginLeft: 0}} onPress={() => {navigate('Hero', {hero: hero})}}>
-        <Thumbnail square size={80} source={{uri: "http://api.opendota.com" + hero.img}}/>
+        <Thumbnail square size={80} source={{uri: `http://188.226.147.71:3030/heroes/sb/${hero.id}.png`}}/>
         <Body>
           <Text>{hero.localized_name}</Text>
           <Text note>{hero.roles.join(', ')}</Text>

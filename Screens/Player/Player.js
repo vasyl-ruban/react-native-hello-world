@@ -1,5 +1,6 @@
 import React from 'react';
 import { Body, Button, Card, CardItem, Col, Container, Content, Footer, FooterTab, Grid, H1, H3, Header, Icon, Input, Item, Left, List, ListItem, Right, Spinner, Text, Thumbnail, View, Tab, Tabs, TabHeading } from "native-base";
+import { Image } from 'react-native';
 import Layout from '../Layout';
 import moment from 'moment';
 
@@ -60,7 +61,7 @@ export default class Player extends React.Component {
      <Card>
        <CardItem>
          <Left>
-           <Thumbnail source={{uri: player.profile.avatarfull}} />
+           <Thumbnail source={{uri: player.profile.avatarfull}}  />
            <Body>
              <Text>{player.profile.personaname}</Text>
              <Text note>{player.mmr_estimate.estimate}</Text>
@@ -119,9 +120,10 @@ const matchView = (navigate) => (heroes) => (match) => {
   let hero = heroes.find(hero => hero.id === match.hero_id);
   let isWonMatch = (match.radiant_win && (match.player_slot < 100)) || (!match.radiant_win && (match.player_slot > 100));
   let duration = (match.duration / 60).toFixed(0) + ':' + ("0" + (match.duration % 60)).slice(-2);
+  console.log(`http://188.226.147.71:3030/heroes/sb/${match.hero_id}.png`);
   return (
     <ListItem key={match.match_id} style={{marginLeft: 0}} onPress={() => {navigate('Match', {matchId: match.match_id})}}>
-      <Thumbnail square size={80} source={{ uri: "http://api.opendota.com" + hero.img }} style={{marginLeft: 15}}/>
+      <Thumbnail square size={80} source={{ uri: `http://188.226.147.71:3030/heroes/sb/${match.hero_id}.png` }} style={{marginLeft: 15}}/>
       <Body>
       <Grid>
         <Col>
@@ -164,9 +166,10 @@ const heroStatView = (heroes) => (stat) => {
   if (!hero) {
     return null;
   } else {
+    // console.log('http://188.226.147.71:3030/heroes/sb/' + stat.hero_id + '.png');
     return (
       <ListItem key={stat.hero_id} style={{marginLeft: 0}}>
-        <Thumbnail square size={80} source={{uri: "http://api.opendota.com" + hero.img}} style={{marginLeft: 15}}/>
+        <Thumbnail square size={80} source={{uri: 'http://188.226.147.71:3030/heroes/sb/' + stat.hero_id + '.png'}} style={{marginLeft: 15}}/>
         <Body>
         <Grid>
           <Col>
