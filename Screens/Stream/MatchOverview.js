@@ -47,9 +47,6 @@ const streamsView = (navigate) => (streams) => {
   let views = streams.map(streamView(navigate));
   return (
     <List>
-      <ListItem itemDivider>
-        <Text>Streams</Text>
-      </ListItem>
       {views}
     </List>
   );

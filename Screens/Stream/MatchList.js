@@ -1,5 +1,5 @@
 import React from 'react';
-import { Body, Button, Card, CardItem, Col, Container, Content, Footer, FooterTab, Grid, H1, H3, Header, Icon, Input, Item, Left, List, ListItem, Right, Spinner, Text, Thumbnail, View, Title} from "native-base";
+import { Body, Button, Card, CardItem, Col, Container, Content, Footer, FooterTab, Grid, H1, H3, Header, Icon, Input, Item, Left, List, ListItem, Right, Spinner, Text, Thumbnail, View, Title, Tab, Tabs, TabHeading } from "native-base";
 import Layout from '../Layout';
 
 export default class MatchList extends React.Component {
@@ -51,22 +51,17 @@ const matchesView = (navigate) => (matches) => {
   let pastMatchesView = pastMatches.map(pastMatchView(navigate));
 
   return (
-    <List>
-      <ListItem itemDivider>
-        <Text>Live matches</Text>
-      </ListItem>
-      {liveMatchesView}
-
-      <ListItem itemDivider>
-        <Text>Future matches</Text>
-      </ListItem>
-      {futureMatchesView}
-
-      <ListItem itemDivider>
-        <Text>Recent matches</Text>
-      </ListItem>
-      {pastMatchesView}
-    </List>
+    <Tabs>
+      <Tab heading={ <TabHeading><Text>Live</Text></TabHeading>}>
+        {liveMatchesView}
+      </Tab>
+      <Tab heading={ <TabHeading><Text>Future</Text></TabHeading>}>
+        {futureMatchesView}
+      </Tab>
+      <Tab heading={ <TabHeading><Text>Recent</Text></TabHeading>}>
+        {pastMatchesView}
+      </Tab>
+    </Tabs>
   );
 };
 
