@@ -25,8 +25,8 @@ export default class MatchList extends React.Component {
     return (
       <Layout navigate={navigate}>
         <Header>
-          <Left onPress={() => {}}>
-            <Button transparent>
+          <Left>
+            <Button transparent onPress={() => {navigate('DrawerOpen')}}>
               <Icon name="menu" />
             </Button>
           </Left>

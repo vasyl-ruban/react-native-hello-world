@@ -63,7 +63,7 @@ export default class SearchPlayer extends React.Component {
       <Layout navigate={navigate} activeTab="SearchPlayer">
         <Header>
           <Left>
-            <Button transparent>
+            <Button transparent onPress={() => {navigate('DrawerOpen')}}>
               <Icon name="menu" />
             </Button>
           </Left>

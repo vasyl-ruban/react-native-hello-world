@@ -54,6 +54,25 @@ export default class Drawer extends React.Component {
               </Body>
             </Left>
           </ListItem>
+
+          <ListItem button noBorder />
+
+          <ListItem itemDivider={this.state.selectedModule === 'StreamModule'} button noBorder onPress={() => this.setModule('StreamModule')}>
+            <Left>
+              <Icon name="settings" />
+              <Body>
+              <Text>Settings</Text>
+              </Body>
+            </Left>
+          </ListItem>
+          <ListItem itemDivider={this.state.selectedModule === 'StreamModule'} button noBorder onPress={() => this.setModule('StreamModule')}>
+            <Left>
+              <Icon name="chatboxes" />
+              <Body>
+              <Text>Feedback</Text>
+              </Body>
+            </Left>
+          </ListItem>
         </List>
       </View>
     );
