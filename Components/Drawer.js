@@ -1,5 +1,5 @@
 import React from 'react';
-import { Body, Button, Card, CardItem, Col, Container, Content, Footer, FooterTab, Grid, H1, H3, Header, Icon, Input, Item, Left, List, ListItem, Right, Spinner, Text, Thumbnail, View } from "native-base";
+import { Body, Button, Card, CardItem, Col, Container, Content, Footer, FooterTab, Grid, H1, H3, Header, Icon, Input, Item, Left, List, ListItem, Right, Spinner, Text, Thumbnail, View, Title } from "native-base";
 
 export default class Drawer extends React.Component {
   constructor(props) {
@@ -25,7 +25,17 @@ export default class Drawer extends React.Component {
 
   render() {
     return (
-      <View style={{marginTop: 50}}>
+      <View>
+        <Header>
+          <Left>
+            <Button transparent>
+              <Icon name="analytics" />
+            </Button>
+          </Left>
+          <Body>
+            <Title>AppName</Title>
+          </Body>
+        </Header>
         <List>
           <ListItem itemDivider={this.state.selectedModule === 'PlayerModule'} button noBorder onPress={() => this.setModule('PlayerModule')}>
             <Left>
