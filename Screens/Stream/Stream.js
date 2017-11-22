@@ -1,5 +1,5 @@
 import React from 'react';
-import { Body, Button, Card, CardItem, Col, Container, Content, Footer, FooterTab, Grid, H1, H3, Header, Icon, Input, Item, Left, List, ListItem, Right, Spinner, Text, Thumbnail, View } from "native-base";
+import { Body, Button, Card, CardItem, Col, Container, Content, Footer, FooterTab, Grid, H1, H3, Header, Icon, Input, Item, Left, List, ListItem, Right, Spinner, Text, Thumbnail, View, Title } from "native-base";
 import { WebView, Dimensions } from 'react-native';
 import Layout from '../Layout';
 
@@ -27,15 +27,21 @@ export default class Stream extends React.Component {
   render() {
     const {navigate} = this.props.navigation;
     let {width, height} = Dimensions.get('screen');
+    let headerStyle = this.state.isLandscape ? {height: 0} : {};
     return (
       <Layout navigate={navigate} isCollapsed={this.state.isLandscape}>
-        <Header>
+        <Header style={headerStyle}>
           <Left>
-            <Icon name="arrow-back" style={{color: 'white'}} onPress={() => {this.props.navigation.goBack()}}/>
+            <Button transparent onPress={() => {this.props.navigation.goBack()}}>
+              <Icon name="arrow-back" />
+            </Button>
           </Left>
-          <Body />
+          <Body>
+            <Title>Stream</Title>
+          </Body>
           <Right />
         </Header>
+
         <WebView
           source={{uri: this.state.streamLink}}
           allowfullscreen="false"

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Body, Button, Card, CardItem, Col, Container, Content, Footer, FooterTab, Grid, H1, H3, Header, Icon, Input, Item, Left, List, ListItem, Right, Spinner, Text, Thumbnail, View } from "native-base";
+import { Body, Button, Card, CardItem, Col, Container, Content, Footer, FooterTab, Grid, H1, H3, Header, Icon, Input, Item, Left, List, ListItem, Right, Spinner, Text, Thumbnail, View, Title} from "native-base";
 import Layout from '../Layout';
 
 export default class MatchList extends React.Component {
@@ -26,9 +26,13 @@ export default class MatchList extends React.Component {
       <Layout navigate={navigate}>
         <Header>
           <Left onPress={() => {}}>
-            <Icon name="menu" style={{color: 'white'}} />
+            <Button transparent>
+              <Icon name="menu" />
+            </Button>
           </Left>
-          <Body />
+          <Body>
+            <Title>Matches</Title>
+          </Body>
           <Right />
         </Header>
         {this.state.matchList.length ? matchesView(navigate)(this.state.matchList) : <Spinner />}

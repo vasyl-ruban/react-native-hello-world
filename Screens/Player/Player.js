@@ -81,16 +81,18 @@ export default class Player extends React.Component {
       <Layout navigate={navigate}>
         <Header>
           <Left>
-            <Icon name="arrow-back" style={{color: 'white'}} onPress={() => {this.props.navigation.goBack()}}/>
+            <Button transparent onPress={() => {this.props.navigation.goBack()}}>
+              <Icon name="arrow-back" onPress={() => {this.props.navigation.goBack()}}/>
+            </Button>
           </Left>
           <Body>
-            <Title>{this.player ? this.player.profile.personaname : null}</Title>
+            <Title>Player</Title>
           </Body>
           <Right />
         </Header>
 
         {!this.state.player ? <Spinner /> : null}
-        {/*{this.state.player ? this.playerView() : null}*/}
+        {this.state.player ? this.playerView() : null}
 
         {
           this.state.player

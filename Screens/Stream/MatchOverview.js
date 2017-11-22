@@ -1,5 +1,5 @@
 import React from 'react';
-import { Body, Button, Card, CardItem, Col, Container, Content, Footer, FooterTab, Grid, H1, H3, Header, Icon, Input, Item, Left, List, ListItem, Right, Spinner, Text, Thumbnail, View } from "native-base";
+import { Body, Button, Card, CardItem, Col, Container, Content, Footer, FooterTab, Grid, H1, H3, Header, Icon, Input, Item, Left, List, ListItem, Right, Spinner, Text, Thumbnail, View, Title } from "native-base";
 import Layout from '../Layout';
 
 export default class MatchList extends React.Component {
@@ -28,9 +28,13 @@ export default class MatchList extends React.Component {
       <Layout navigate={navigate}>
         <Header>
           <Left>
-            <Icon name="arrow-back" style={{color: 'white'}} onPress={() => {this.props.navigation.goBack()}}/>
+            <Button transparent onPress={() => {this.props.navigation.goBack()}}>
+              <Icon name="arrow-back" />
+            </Button>
           </Left>
-          <Body />
+          <Body>
+            <Title>Streams</Title>
+          </Body>
           <Right />
         </Header>
         {this.state.streams.length ? streamsView(navigate)(this.state.streams) : <Spinner />}
