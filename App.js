@@ -10,6 +10,7 @@ import Hero from "./Screens/Hero";
 import Live from "./Screens/Live";
 import SearchPlayer from "./Screens/Player/SearchPlayer";
 import Player from "./Screens/Player/Player";
+import Match from "./Screens/Player/Match"
 import MatchList from "./Screens/Stream/MatchList";
 import MatchOverview from "./Screens/Stream/MatchOverview";
 import Stream from "./Screens/Stream/Stream";
@@ -18,6 +19,7 @@ import Drawer from "./Components/Drawer";
 const PlayerNavigator = StackNavigator({
   SearchPlayer: {screen: SearchPlayer},
   Player: {screen: Player},
+  Match: {screen: Match}
 }, {
   initialRouteName: "SearchPlayer",
   headerMode: "none"
