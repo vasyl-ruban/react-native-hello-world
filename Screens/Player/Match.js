@@ -1,5 +1,7 @@
 import React from 'react';
-import { Body, Button, Card, CardItem, Col, Container, Content, Footer, FooterTab, Grid, H1, H3, Header, Icon, Input, Item, Left, List, ListItem, Right, Spinner, Text, Thumbnail, View, Tab, Tabs, TabHeading, Separator, Row } from "native-base";
+import { Body, Button, Card, CardItem, Col, Container, Content, Footer, FooterTab, Grid, H1, H3, Header, Icon, Input, Item, Left, List, ListItem, Right, Spinner, Text, Thumbnail, View, Tab, Tabs, TabHeading, Separator, Row, Title } from "native-base";
+import ItemImage from '../../Components/ItemImage';
+import HeroImage from '../../Components/HeroImage';
 import Layout from '../Layout';
 import moment from 'moment';
 
@@ -39,9 +41,13 @@ export default class Match extends React.Component {
       <Layout navigate={navigate}>
         <Header>
           <Left>
-            <Icon name="arrow-back" style={{color: 'white'}} onPress={() => {this.props.navigation.goBack()}}/>
+            <Button transparent>
+              <Icon name="arrow-back" onPress={() => {this.props.navigation.goBack()}}/>
+            </Button>
           </Left>
-          <Body />
+          <Body>
+            <Title style={{width: 175}}>Match {this.state.matchId}</Title>
+          </Body>
           <Right />
         </Header>
         { this.state.match && this.state.heroes.length ? matchView(this.state.heroes)(this.state.match) : <Spinner /> }
@@ -53,21 +59,63 @@ export default class Match extends React.Component {
 const matchView = (heroes) => (match) => {
   let radiantPlayers = match.players.slice(0, 5);
   let direPlayers = match.players.slice(5, 10);
-  let radiantPlayersView = radiantPlayers.map(playerRow(heroes));
-  let direPlayersView = direPlayers.map(playerRow(heroes));
+
+  let radiantOverviewView = radiantPlayers.map(playerOverviewRow);
+  let direOverviewView = direPlayers.map(playerOverviewRow);
+  let radiantFarmView = radiantPlayers.map(playerFarmRow);
+  let direFarmView = direPlayers.map(playerFarmRow);
+  let radiantDamageView = radiantPlayers.map(playerDamageRow);
+  let direDamageView = direPlayers.map(playerDamageRow);
+  let radiantItemsView = radiantPlayers.map(playerItemRow);
+  let direItemsView = direPlayers.map(playerItemRow);
+
   return (
-    <List>
-      <Separator bordered>
-        <Text>Radiant</Text>
-      </Separator>
-      {radiantPlayersView}
+    <Tabs>
+      <Tab heading={ <TabHeading><Text>Overview</Text></TabHeading>}>
+        <ListItem itemDivider>
+          <Text>Radiant</Text>
+        </ListItem>
+        {radiantOverviewView}
 
-      <Separator bordered>
-        <Text>Dire</Text>
-      </Separator>
-      {direPlayersView}
+        <ListItem itemDivider>
+          <Text>Dire</Text>
+        </ListItem>
+        {direOverviewView}
+      </Tab>
+      <Tab heading={ <TabHeading><Text>Farm</Text></TabHeading>}>
+        <ListItem itemDivider>
+          <Text>Radiant</Text>
+        </ListItem>
+        {radiantFarmView}
 
-    </List>
+        <ListItem itemDivider>
+          <Text>Dire</Text>
+        </ListItem>
+        {direFarmView}
+      </Tab>
+      <Tab heading={ <TabHeading><Text>Damage</Text></TabHeading>}>
+        <ListItem itemDivider>
+          <Text>Radiant</Text>
+        </ListItem>
+        {radiantDamageView}
+
+        <ListItem itemDivider>
+          <Text>Dire</Text>
+        </ListItem>
+        {direDamageView}
+      </Tab>
+      <Tab heading={ <TabHeading><Text>Items</Text></TabHeading>}>
+        <ListItem itemDivider>
+          <Text>Radiant</Text>
+        </ListItem>
+        {radiantItemsView}
+
+        <ListItem itemDivider>
+          <Text>Dire</Text>
+        </ListItem>
+        {direItemsView}
+      </Tab>
+    </Tabs>
   );
 };
 
@@ -78,9 +126,10 @@ const playerRow = (heroes) => (player) => {
   let netWorth = (player.gold_spent / 1000).toFixed(1) + 'k';
   let heroDamage = (player.hero_damage / 1000).toFixed(1) + 'k';
   let towerDamage = (player.tower_damage / 1000).toFixed(1) + 'k';
+
   return (
     <ListItem key={player.hero_id}>
-      <Thumbnail square size={80} source={{uri: `http://188.226.147.71:3030/heroes/sb/${player.hero_id}.png`}} style={{marginLeft: 15}}/>
+      <HeroImage heroId={player.hero_id}/>
       <Body>
         <Grid>
           <Col>
@@ -92,14 +141,14 @@ const playerRow = (heroes) => (player) => {
           <Col>
             <Grid>
               <Row>
-                <Col><Text><Thumbnail square small source={{uri: 'http://188.226.147.71:3030/items/lg/' + player.item_0 + '.png'}} /></Text></Col>
-                <Col><Text><Thumbnail square small source={{uri: 'http://188.226.147.71:3030/items/lg/' + player.item_1 + '.png'}} /></Text></Col>
-                <Col><Text><Thumbnail square small source={{uri: 'http://188.226.147.71:3030/items/lg/' + player.item_2 + '.png'}} /></Text></Col>
+                <ItemImage itemId={player.item_0} />
+                <ItemImage itemId={player.item_1} />
+                <ItemImage itemId={player.item_2} />
               </Row>
               <Row>
-                <Col><Text><Thumbnail square small source={{uri: 'http://188.226.147.71:3030/items/lg/' + player.item_3 + '.png'}} /></Text></Col>
-                <Col><Text><Thumbnail square small source={{uri: 'http://188.226.147.71:3030/items/lg/' + player.item_4 + '.png'}} /></Text></Col>
-                <Col><Text><Thumbnail square small source={{uri: 'http://188.226.147.71:3030/items/lg/' + player.item_5 + '.png'}} /></Text></Col>
+                <ItemImage itemId={player.item_3} />
+                <ItemImage itemId={player.item_4} />
+                <ItemImage itemId={player.item_5} />
               </Row>
             </Grid>
           </Col>
@@ -116,6 +165,110 @@ const playerRow = (heroes) => (player) => {
             {/*<Text note>tower dmg</Text>*/}
           {/*</Col>*/}
         </Grid>
+      </Body>
+    </ListItem>
+  );
+};
+
+const playerOverviewRow = (player) => {
+  let netWorth = (player.gold_spent / 1000).toFixed(1) + 'k';
+
+  return (
+    <ListItem key={player.hero_id} style={{marginLeft: 0}}>
+      <Left>
+        <HeroImage heroId={player.hero_id}/>
+        <Text>{player.personaname || 'Anonymous'}</Text>
+      </Left>
+      <Body>
+      <Grid>
+        <Col>
+          <Text>{player.kills}/{player.deaths}/{player.assists}</Text>
+          <Text note>K/D/A</Text>
+        </Col>
+        <Col>
+          <Text>{netWorth}</Text>
+          <Text note>net worth</Text>
+        </Col>
+      </Grid>
+      </Body>
+    </ListItem>
+  );
+};
+
+const playerFarmRow = (player) => {
+  return (
+    <ListItem key={player.hero_id} style={{marginLeft: 0}}>
+      <Left>
+        <HeroImage heroId={player.hero_id}/>
+        <Text>{player.personaname || 'Anonymous'}</Text>
+      </Left>
+      <Body>
+      <Grid>
+        <Col>
+          <Text>{player.last_hits}/{player.denies}</Text>
+          <Text note>LH/D</Text>
+        </Col>
+        <Col>
+          <Text>{player.gold_per_min}/{player.xp_per_min}</Text>
+          <Text note>GPM/XPM</Text>
+        </Col>
+      </Grid>
+      </Body>
+    </ListItem>
+  );
+};
+
+const playerDamageRow = (player) => {
+  let heroDamage = (player.hero_damage / 1000).toFixed(1) + 'k';
+  let towerDamage = (player.tower_damage / 1000).toFixed(1) + 'k';
+  let heroHealing = player.hero_healing ? (player.hero_healing / 1000).toFixed(1) + 'k' : '-';
+
+  return (
+    <ListItem key={player.hero_id} style={{marginLeft: 0}}>
+      <Left>
+        <HeroImage heroId={player.hero_id}/>
+        <Text>{player.personaname || 'Anonymous'}</Text>
+      </Left>
+      <Body>
+      <Grid>
+        <Col>
+          <Text>{heroDamage}</Text>
+          <Text note>hero damage</Text>
+        </Col>
+        <Col>
+          <Text>{heroHealing}</Text>
+          <Text note>hero healing</Text>
+        </Col>
+        <Col>
+          <Text>{towerDamage}</Text>
+          <Text note>tower damage</Text>
+        </Col>
+      </Grid>
+      </Body>
+    </ListItem>
+  );
+};
+
+const playerItemRow = (player) => {
+  return (
+    <ListItem key={player.hero_id} style={{marginLeft: 0}}>
+      <Left>
+        <HeroImage heroId={player.hero_id}/>
+        <Text>{player.personaname || 'Anonymous'}</Text>
+      </Left>
+      <Body>
+      <Grid>
+        <Row>
+          <ItemImage itemId={player.item_0} />
+          <ItemImage itemId={player.item_1} />
+          <ItemImage itemId={player.item_2} />
+        </Row>
+        <Row>
+          <ItemImage itemId={player.item_3} />
+          <ItemImage itemId={player.item_4} />
+          <ItemImage itemId={player.item_5} />
+        </Row>
+      </Grid>
       </Body>
     </ListItem>
   );

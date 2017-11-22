@@ -1,6 +1,7 @@
 import React from 'react';
-import { Body, Button, Card, CardItem, Col, Container, Content, Footer, FooterTab, Grid, H1, H3, Header, Icon, Input, Item, Left, List, ListItem, Right, Spinner, Text, Thumbnail, View, Tab, Tabs, TabHeading } from "native-base";
+import { Body, Button, Card, CardItem, Col, Container, Content, Footer, FooterTab, Grid, H1, H3, Header, Icon, Input, Item, Left, List, ListItem, Right, Spinner, Text, Thumbnail, View, Tab, Tabs, TabHeading, Title } from "native-base";
 import { Image } from 'react-native';
+import HeroImage from '../../Components/HeroImage';
 import Layout from '../Layout';
 import moment from 'moment';
 
@@ -82,12 +83,14 @@ export default class Player extends React.Component {
           <Left>
             <Icon name="arrow-back" style={{color: 'white'}} onPress={() => {this.props.navigation.goBack()}}/>
           </Left>
-          <Body />
+          <Body>
+            <Title>{this.player ? this.player.profile.personaname : null}</Title>
+          </Body>
           <Right />
         </Header>
 
         {!this.state.player ? <Spinner /> : null}
-        {this.state.player ? this.playerView() : null}
+        {/*{this.state.player ? this.playerView() : null}*/}
 
         {
           this.state.player
@@ -123,7 +126,7 @@ const matchView = (navigate) => (heroes) => (match) => {
   console.log(`http://188.226.147.71:3030/heroes/sb/${match.hero_id}.png`);
   return (
     <ListItem key={match.match_id} style={{marginLeft: 0}} onPress={() => {navigate('Match', {matchId: match.match_id})}}>
-      <Thumbnail square size={80} source={{ uri: `http://188.226.147.71:3030/heroes/sb/${match.hero_id}.png` }} style={{marginLeft: 15}}/>
+      <HeroImage heroId={match.hero_id} />
       <Body>
       <Grid>
         <Col>
@@ -169,7 +172,7 @@ const heroStatView = (heroes) => (stat) => {
     // console.log('http://188.226.147.71:3030/heroes/sb/' + stat.hero_id + '.png');
     return (
       <ListItem key={stat.hero_id} style={{marginLeft: 0}}>
-        <Thumbnail square size={80} source={{uri: 'http://188.226.147.71:3030/heroes/sb/' + stat.hero_id + '.png'}} style={{marginLeft: 15}}/>
+        <HeroImage heroId={stat.hero_id} />
         <Body>
         <Grid>
           <Col>
