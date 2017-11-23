@@ -14,6 +14,8 @@ import Match from "./Screens/Player/Match"
 import MatchList from "./Screens/Stream/MatchList";
 import MatchOverview from "./Screens/Stream/MatchOverview";
 import Stream from "./Screens/Stream/Stream";
+import Feedback from "./Screens/Feedback/Feedback";
+import Settings from "./Screens/Settings/Settings";
 import Drawer from "./Components/Drawer";
 
 const PlayerNavigator = StackNavigator({
@@ -34,12 +36,24 @@ const StreamNavigator = StackNavigator({
   headerMode: "none"
 });
 
+const SettingsNavigator = StackNavigator({
+  Settings: {screen: Settings}
+}, {
+  initialRouteName: "Settings",
+  headerMode: "none"
+});
+const FeedbackNavigator = StackNavigator({
+  Feedback: {screen: Feedback}
+}, {
+  initialRouteName: "Feedback",
+  headerMode: "none"
+});
+
 const AppNavigator = DrawerNavigator({
-  // Heroes: {screen: Heroes},
-  // Hero: {screen: Hero},
-  // Live: {screen: Live},
   PlayerModule: {screen: PlayerNavigator},
-  StreamModule: {screen: StreamNavigator}
+  StreamModule: {screen: StreamNavigator},
+  SettingsModule: {screen: SettingsNavigator},
+  FeedbackModule: {screen: FeedbackNavigator},
 }, {
   initialRouteName: "PlayerModule",
   contentComponent: Drawer,

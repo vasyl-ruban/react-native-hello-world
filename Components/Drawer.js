@@ -57,7 +57,7 @@ export default class Drawer extends React.Component {
 
           <ListItem button noBorder />
 
-          <ListItem itemDivider={this.state.selectedModule === 'StreamModule'} button noBorder onPress={() => this.setModule('StreamModule')}>
+          <ListItem itemDivider={this.state.selectedModule === 'SettingsModule'} button noBorder onPress={() => this.setModule('SettingsModule')}>
             <Left>
               <Icon name="settings" />
               <Body>
@@ -65,7 +65,7 @@ export default class Drawer extends React.Component {
               </Body>
             </Left>
           </ListItem>
-          <ListItem itemDivider={this.state.selectedModule === 'StreamModule'} button noBorder onPress={() => this.setModule('StreamModule')}>
+          <ListItem itemDivider={this.state.selectedModule === 'FeedbackModule'} button noBorder onPress={() => this.setModule('FeedbackModule')}>
             <Left>
               <Icon name="chatboxes" />
               <Body>
