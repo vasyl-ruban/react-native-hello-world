@@ -1,5 +1,17 @@
 {
   "expo": {
-    "sdkVersion": "22.0.0"
+    "name": "EasyGame: Dota 2",
+    "slug": "EasyGame: Dota 2",
+    "version": "0.0.0",
+    "icon": "./logo.png",
+    "sdkVersion": "22.0.0",
+    "ios": {
+      "bundleIdentifier": "com.razdva.easyGame"
+    },
+    "android": {
+      "package": "com.razdva.easyGame",
+      "versionCode": 3,
+      "permissions": []
+    }
   }
 }

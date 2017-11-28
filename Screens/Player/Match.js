@@ -233,15 +233,15 @@ const playerDamageRow = (player) => {
       <Grid>
         <Col>
           <Text>{heroDamage}</Text>
-          <Text note>hero damage</Text>
+          <Text note>hero</Text>
         </Col>
-        <Col>
-          <Text>{heroHealing}</Text>
-          <Text note>hero healing</Text>
-        </Col>
+        {/*<Col>*/}
+          {/*<Text>{heroHealing}</Text>*/}
+          {/*<Text note>hero healing</Text>*/}
+        {/*</Col>*/}
         <Col>
           <Text>{towerDamage}</Text>
-          <Text note>tower damage</Text>
+          <Text note>tower</Text>
         </Col>
       </Grid>
       </Body>

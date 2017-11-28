@@ -1,6 +1,6 @@
 {
-  "name": "dota",
-  "version": "0.1.0",
+  "name": "EazyGame",
+  "version": "0.0.1",
   "private": true,
   "devDependencies": {
     "react-native-scripts": "1.7.0",

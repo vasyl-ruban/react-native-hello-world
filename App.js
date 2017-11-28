@@ -5,9 +5,6 @@ import {
 import React from 'react';
 import {DrawerNavigator, StackNavigator} from "react-navigation";
 
-import Heroes from "./Screens/Heroes";
-import Hero from "./Screens/Hero";
-import Live from "./Screens/Live";
 import SearchPlayer from "./Screens/Player/SearchPlayer";
 import Player from "./Screens/Player/Player";
 import Match from "./Screens/Player/Match"
@@ -16,6 +13,8 @@ import MatchOverview from "./Screens/Stream/MatchOverview";
 import Stream from "./Screens/Stream/Stream";
 import Feedback from "./Screens/Feedback/Feedback";
 import Settings from "./Screens/Settings/Settings";
+import About from "./Screens/About/About";
+import News from "./Screens/News/News";
 import Drawer from "./Components/Drawer";
 
 const PlayerNavigator = StackNavigator({
@@ -48,14 +47,28 @@ const FeedbackNavigator = StackNavigator({
   initialRouteName: "Feedback",
   headerMode: "none"
 });
+const AboutNavigator = StackNavigator({
+  About: {screen: About}
+}, {
+  initialRouteName: "About",
+  headerMode: "none"
+});
+const NewsNavigator = StackNavigator({
+  News: {screen: News}
+}, {
+  initialRouteName: "News",
+  headerMode: "none"
+});
 
 const AppNavigator = DrawerNavigator({
   PlayerModule: {screen: PlayerNavigator},
   StreamModule: {screen: StreamNavigator},
   SettingsModule: {screen: SettingsNavigator},
   FeedbackModule: {screen: FeedbackNavigator},
+  AboutModule: {screen: AboutNavigator},
+  NewsModule: {screen: NewsNavigator},
 }, {
-  initialRouteName: "PlayerModule",
+  initialRouteName: "NewsModule",
   contentComponent: Drawer,
   backBehavior: "none"
 });

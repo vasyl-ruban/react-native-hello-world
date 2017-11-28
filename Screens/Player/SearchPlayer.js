@@ -18,6 +18,7 @@ export default class SearchPlayer extends React.Component {
 
     this.searchPlayer = this.searchPlayer.bind(this);
     this.queryStringUpdate = this.queryStringUpdate.bind(this);
+    this.clearSearch = this.clearSearch.bind(this);
   }
 
   updateRecentPlayers() {
@@ -52,6 +53,10 @@ export default class SearchPlayer extends React.Component {
       });
   }
 
+  clearSearch() {
+    this.setState((prev) => ({...prev, foundPlayers: [], queryString: ''}));
+  }
+
   render() {
     let {navigate} = this.props.navigation;
     let playerPressHandler = (player) => {
@@ -74,7 +79,10 @@ export default class SearchPlayer extends React.Component {
         </Header>
         <Item>
           <Icon name="ios-people" style={{marginLeft: 15}}/>
-          <Input placeholder="Search player" onChangeText={this.queryStringUpdate}/>
+          <Input placeholder="Enter player's nickname" value={this.state.queryString} onChangeText={this.queryStringUpdate}/>
+          <Button transparent onPress={this.clearSearch}>
+            <Icon name="md-close"/>
+          </Button>
           <Button transparent onPress={this.searchPlayer}>
             <Text>Search</Text>
           </Button>

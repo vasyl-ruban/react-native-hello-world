@@ -12,8 +12,10 @@ export default class Player extends React.Component {
     this.state = {
       player: null,
       recentMatches: [],
+      recentMatchesLimit: 10,
       heroes: [],
       heroesStats: [],
+      heroesStatsLimit: 10,
       playerId: this.props.navigation.state.params.playerId
     };
 
@@ -98,10 +100,38 @@ export default class Player extends React.Component {
           this.state.player
           ? <Tabs>
               <Tab heading={ <TabHeading><Text>Most played heroes</Text></TabHeading>}>
-                {(this.state.heroesStats.length && this.state.heroes.length) ? heroesStatsView(this.state.heroes)(this.state.heroesStats) : null}
+                {(this.state.heroesStats.length && this.state.heroes.length)
+                  ? (
+                    <List>
+                      {heroesStatsView(this.state.heroes)(this.state.heroesStats.slice(0, this.state.heroesStatsLimit))}
+
+                      <ListItem>
+                        <Body>
+                        <Button full onPress={() => {this.setState(prev => ({...prev, heroesStatsLimit: prev.heroesStatsLimit + 10}))}}>
+                        <Text>Load more</Text>
+                        </Button>
+                        </Body>
+                      </ListItem>
+                    </List>
+                  )
+                  : null}
               </Tab>
               <Tab heading={ <TabHeading><Text>Past matches</Text></TabHeading>}>
-                {(this.state.recentMatches.length && this.state.heroes.length) ? recentMatchesView(navigate)(this.state.heroes)(this.state.recentMatches) : null}
+                {(this.state.recentMatches.length && this.state.heroes.length)
+                  ? (
+                    <List>
+                      {recentMatchesView(navigate)(this.state.heroes)(this.state.recentMatches.slice(0, this.state.recentMatchesLimit))}
+
+                      <ListItem>
+                        <Body>
+                        <Button full onPress={() => {this.setState(prev => ({...prev, recentMatchesLimit: prev.recentMatchesLimit + 10}))}}>
+                          <Text>Load more</Text>
+                        </Button>
+                        </Body>
+                      </ListItem>
+                    </List>
+                  )
+                  : null}
               </Tab>
             </Tabs>
           : null
@@ -113,7 +143,7 @@ export default class Player extends React.Component {
 
 
 const recentMatchesView = (navigate) => (heroes) => (matchList) => {
-  let recentMatches = matchList.slice(0, 10).map(matchView(navigate)(heroes));
+  let recentMatches = matchList.map(matchView(navigate)(heroes));
   return (
     <List>
       {recentMatches}
@@ -158,7 +188,7 @@ const matchView = (navigate) => (heroes) => (match) => {
 };
 
 const heroesStatsView = (heroes) => (stats) => {
-  let heroesStats = stats.slice(0, 10).map(heroStatView(heroes));
+  let heroesStats = stats.map(heroStatView(heroes));
   return (
     <List>
       {heroesStats}
