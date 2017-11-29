@@ -15,6 +15,7 @@ import Feedback from "./Screens/Feedback/Feedback";
 import Settings from "./Screens/Settings/Settings";
 import About from "./Screens/About/About";
 import News from "./Screens/News/News";
+import Article from "./Screens/News/Article";
 import Drawer from "./Components/Drawer";
 
 const PlayerNavigator = StackNavigator({
@@ -54,7 +55,8 @@ const AboutNavigator = StackNavigator({
   headerMode: "none"
 });
 const NewsNavigator = StackNavigator({
-  News: {screen: News}
+  News: {screen: News},
+  Article: {screen: Article},
 }, {
   initialRouteName: "News",
   headerMode: "none"

@@ -37,9 +37,15 @@ export default class News extends React.Component {
         </Header>
         <Content>
           <Tabs>
+            <Tab heading={<TabHeading><Text>Article</Text></TabHeading>}>
+              <WebView
+                source={{uri: "http://188.226.147.71:3000/news/feed/1/2017-11-28-dealing-with-puck"}}
+                style={{width: 600, height: 900}}
+              />
+            </Tab>
             <Tab heading={<TabHeading><Text>joinDOTA</Text></TabHeading>}>
               {this.state.joindotaFeed.map((item) =>
-                <ListItem onPress={() => {Linking.openURL(item.link)}}>
+                <ListItem onPress={() => {navigate('Article', {feedId: 0, articleId: item.id})}}>
                   <Body>
                     <Text>{item.title}</Text>
                   </Body>
@@ -52,7 +58,7 @@ export default class News extends React.Component {
 
             <Tab heading={<TabHeading><Text>dotabuff</Text></TabHeading>}>
               {this.state.dotabuffFeed.map((item) =>
-                <ListItem onPress={() => {Linking.openURL(item.link)}}>
+                <ListItem onPress={() => {navigate('Article', {feedId: 1, articleId: item.id})}}>
                   <Body>
                     <Text>{item.title}</Text>
                   </Body>
