@@ -10,7 +10,7 @@
     },
     "android": {
       "package": "com.razdva.easyGame",
-      "versionCode": 3,
+      "versionCode": 4,
       "permissions": []
     }
   }
