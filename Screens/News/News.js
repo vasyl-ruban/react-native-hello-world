@@ -39,7 +39,7 @@ export default class News extends React.Component {
           <Tabs>
             <Tab heading={<TabHeading><Text>joinDOTA</Text></TabHeading>}>
               {this.state.joindotaFeed.map((item) =>
-                <ListItem onPress={() => {Linking.openURL(item.link)}}>
+                <ListItem onPress={() => {navigate('Article', {feedId: 0, articleId: item.id, feedSource: item.link})}}>
                   <Body>
                     <Text>{item.title}</Text>
                   </Body>
@@ -52,7 +52,7 @@ export default class News extends React.Component {
 
             <Tab heading={<TabHeading><Text>dotabuff</Text></TabHeading>}>
               {this.state.dotabuffFeed.map((item) =>
-                <ListItem onPress={() => {Linking.openURL(item.link)}}>
+                <ListItem onPress={() => {navigate('Article', {feedId: 1, articleId: item.id, feedSource: item.link})}}>
                   <Body>
                     <Text>{item.title}</Text>
                   </Body>
