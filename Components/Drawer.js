@@ -56,7 +56,16 @@ export default class Drawer extends React.Component {
             <Left>
               <Icon name="easel" />
               <Body>
-                <Text>Live streams</Text>
+                <Text>Streams</Text>
+              </Body>
+            </Left>
+          </ListItem>
+
+          <ListItem itemDivider={this.state.selectedModule === 'LiveModule'} button noBorder onPress={() => this.setModule('LiveModule')}>
+            <Left>
+              <Icon name="easel" />
+              <Body>
+                <Text>Live matches</Text>
               </Body>
             </Left>
           </ListItem>
@@ -81,7 +90,7 @@ export default class Drawer extends React.Component {
           </ListItem>
           <ListItem itemDivider={this.state.selectedModule === 'AboutModule'} button noBorder onPress={() => this.setModule('AboutModule')}>
             <Left>
-              <Icon name="question" />
+              <Icon name="help" />
               <Body>
               <Text>About</Text>
               </Body>

@@ -4,6 +4,12 @@ import Layout from '../Layout';
 import firebase from 'firebase';
 
 const config = {
+  apiKey: "AIzaSyAjk3biiihv-mz7x_QZAUfSTKTSpbCVa0M",
+  authDomain: "react-native-hello-world.firebaseapp.com",
+  databaseURL: "https://react-native-hello-world.firebaseio.com",
+  projectId: "react-native-hello-world",
+  storageBucket: "react-native-hello-world.appspot.com",
+  messagingSenderId: "533272346721"
 };
 const app = firebase.initializeApp(config);
 

@@ -5,4 +5,11 @@ import HeroImage from '../../Components/HeroImage';
 import Layout from '../Layout';
 import moment from 'moment';
 
-export default class LiveMatch extends React.Component {}
+export default class LiveMatch extends React.Component {
+
+  render() {
+    return (
+     <Text>live match</Text>
+    );
+  }
+}

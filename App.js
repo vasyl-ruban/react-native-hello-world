@@ -16,6 +16,8 @@ import Settings from "./Screens/Settings/Settings";
 import About from "./Screens/About/About";
 import News from "./Screens/News/News";
 import Article from "./Screens/News/Article";
+import LiveMatches from "./Screens/Live/LiveMatches";
+import LiveMatch from "./Screens/Live/LiveMatch";
 import Drawer from "./Components/Drawer";
 
 const PlayerNavigator = StackNavigator({
@@ -61,6 +63,13 @@ const NewsNavigator = StackNavigator({
   initialRouteName: "News",
   headerMode: "none"
 });
+const LiveNavigator = StackNavigator({
+  LiveMatches: {screen: LiveMatches},
+  LiveMatch: {screen: LiveMatch},
+}, {
+  initialRouteName: "LiveMatches",
+  headerMode: "none"
+});
 
 const AppNavigator = DrawerNavigator({
   PlayerModule: {screen: PlayerNavigator},
@@ -69,6 +78,7 @@ const AppNavigator = DrawerNavigator({
   FeedbackModule: {screen: FeedbackNavigator},
   AboutModule: {screen: AboutNavigator},
   NewsModule: {screen: NewsNavigator},
+  LiveModule: {screen: LiveNavigator},
 }, {
   initialRouteName: "NewsModule",
   contentComponent: Drawer,
