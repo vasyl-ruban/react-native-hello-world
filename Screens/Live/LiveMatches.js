@@ -17,6 +17,8 @@ export default class LiveMatches extends React.Component {
 
 
     this.loadData = this.loadData.bind(this);
+
+    this.loadData();
   }
 
   loadData() {
@@ -61,6 +63,9 @@ export default class LiveMatches extends React.Component {
 function LiveMatchItem({match}) {
   let radiantPlayers = match.players.filter((player) => player.team == 0);
   let direPlayers = match.players.filter((player) => player.team == 1);
+  if (!match.radiant_team || !match.dire_team || !match.players.length) {
+    return null;
+  }
   return (
     <Card>
       <LiveMatchTeam radiant={match.radiant_team} dire={match.dire_team} />
