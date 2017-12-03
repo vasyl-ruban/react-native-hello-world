@@ -17,9 +17,7 @@ export default class Layout extends React.Component {
     const isCollapsed = this.props.isCollapsed;
     return (
       <Container>
-        <Content>
-          {this.props.children}
-        </Content>
+        {this.props.children}
       </Container>
     );
   }

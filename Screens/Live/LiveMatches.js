@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ScrollView, RefreshControl } from 'react-native';
 import { Body, Button, Card, CardItem, Col, Container, Content, Footer, FooterTab, Grid, H1, H3, Header, Icon, Input, Item, Left, List, ListItem, Right, Spinner, Text, Thumbnail, View, Tab, Tabs, TabHeading, Separator, Row, Title } from "native-base";
 import ItemImage from '../../Components/ItemImage';
 import HeroImage from '../../Components/HeroImage';
@@ -11,12 +11,18 @@ export default class LiveMatches extends React.Component {
     super(props);
 
     this.state = {
+      isReloading: false,
       matches: []
     };
 
+
+    this.loadData = this.loadData.bind(this);
+  }
+
+  loadData() {
     fetch('http://188.226.147.71:3000/live')
       .then((res) => res.json())
-      .then((res) => this.setState(prev => ({...prev, matches: res})));
+      .then((res) => this.setState(prev => ({...prev, matches: res, isReloading: false})));
   }
 
   render() {
@@ -35,18 +41,26 @@ export default class LiveMatches extends React.Component {
           </Body>
           <Right />
         </Header>
+
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.isReloading}
+              onRefresh={this.loadData}
+            />}>
           {this.state.matches.length
             ? this.state.matches.map((match) => <LiveMatchItem match={match} key={match.match_id} />)
             : <Spinner />
           }
+        </ScrollView>
       </Layout>
     );
   }
 }
 
 function LiveMatchItem({match}) {
-  let radiantPlayers = match.players.slice(0, 5);
-  let direPlayers = match.players.slice(5, 10);
+  let radiantPlayers = match.players.filter((player) => player.team == 0);
+  let direPlayers = match.players.filter((player) => player.team == 1);
   return (
     <Card>
       <LiveMatchTeam radiant={match.radiant_team} dire={match.dire_team} />
