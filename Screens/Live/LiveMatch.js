@@ -164,39 +164,62 @@ function GameSummary({scoreboard}) {
 function PlayerInfo({player}) {
   return (
     <ListItem style={{marginLeft: 0}}>
-      <Left>
-        <Grid>
+      <Grid>
+        <Col>
           <Row>
-            <HeroImage heroId={player.hero_id} />
+            <HeroImage heroId={player.hero_id} timeToRespawn={player.respawn_timer} />
           </Row>
           <Row>
-            <Col>
-              <Text>{player.kills}/{player.death}/{player.assists}</Text>
-              <Text note>K/D/A</Text>
-            </Col>
+            <Text>{player.kills}/{player.death}/{player.assists}</Text>
+            <Text note>K/D/A</Text>
           </Row>
-        </Grid>
-      </Left>
-      <Body>
-        <Grid>
+        </Col>
+        <Col>
           <Row>
-            <Col>
-            <Text>{player.level} lvl</Text>
-            <Text note>{player.gold} gold</Text>
-            </Col>
-            <Col>
-            <Row>
-            <ItemImage itemId={player.item0} />
-            <ItemImage itemId={player.item1} />
-            <ItemImage itemId={player.item2} />
-            <ItemImage itemId={player.item3} />
-            <ItemImage itemId={player.item4} />
-            <ItemImage itemId={player.item5} />
-            </Row>
-            </Col>
-            </Row>
-        </Grid>
-      </Body>
+            <ItemImage itemId={player.item0} small />
+            <ItemImage itemId={player.item1} small />
+            <ItemImage itemId={player.item2} small />
+          </Row>
+          <Row>
+            <ItemImage itemId={player.item3} small />
+            <ItemImage itemId={player.item4} small />
+            <ItemImage itemId={player.item5} small />
+          </Row>
+        </Col>
+      </Grid>
+      {/*<Left>*/}
+        {/*<Grid>*/}
+          {/*<Row>*/}
+            {/*<HeroImage heroId={player.hero_id} />*/}
+          {/*</Row>*/}
+          {/*<Row>*/}
+            {/*<Col>*/}
+              {/*<Text>{player.kills}/{player.death}/{player.assists}</Text>*/}
+              {/*<Text note>K/D/A</Text>*/}
+            {/*</Col>*/}
+          {/*</Row>*/}
+        {/*</Grid>*/}
+      {/*</Left>*/}
+      {/*<Body>*/}
+        {/*<Grid>*/}
+          {/*<Row>*/}
+            {/*<Col>*/}
+            {/*<Text>{player.level} lvl</Text>*/}
+            {/*<Text note>{player.gold} gold</Text>*/}
+            {/*</Col>*/}
+            {/*<Col>*/}
+            {/*<Row>*/}
+            {/*<ItemImage itemId={player.item0} />*/}
+            {/*<ItemImage itemId={player.item1} />*/}
+            {/*<ItemImage itemId={player.item2} />*/}
+            {/*<ItemImage itemId={player.item3} />*/}
+            {/*<ItemImage itemId={player.item4} />*/}
+            {/*<ItemImage itemId={player.item5} />*/}
+            {/*</Row>*/}
+            {/*</Col>*/}
+            {/*</Row>*/}
+        {/*</Grid>*/}
+      {/*</Body>*/}
     </ListItem>
   );
 }
