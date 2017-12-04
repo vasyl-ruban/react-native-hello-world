@@ -51,7 +51,7 @@ export default class LiveMatches extends React.Component {
               onRefresh={this.loadData}
             />}>
           {this.state.matches.length
-            ? this.state.matches.map((match) => <LiveMatchItem match={match} key={match.match_id} />)
+            ? this.state.matches.map((match) => <LiveMatchItem match={match} navigate={navigate} key={match.match_id} />)
             : <Spinner />
           }
         </ScrollView>
@@ -60,7 +60,7 @@ export default class LiveMatches extends React.Component {
   }
 }
 
-function LiveMatchItem({match}) {
+function LiveMatchItem({match, navigate}) {
   let radiantPlayers = match.players.filter((player) => player.team == 0);
   let direPlayers = match.players.filter((player) => player.team == 1);
   if (!match.radiant_team || !match.dire_team || !match.players.length) {
@@ -95,7 +95,7 @@ function LiveMatchItem({match}) {
         <Left />
         <Body />
         <Right>
-          <Button transparent>
+          <Button transparent onPress={() => {navigate('LiveMatch', {matchId: match.match_id})}}>
             <Text>Details</Text>
             <Icon name="arrow-forward" />
           </Button>
