@@ -6,13 +6,19 @@ export default class HeroImage extends React.Component {
     super(props);
 
     this.state = {
-      timeToRespawn: this.props.timeToRespawn
+      timeToRespawn: this.props.timeToRespawn,
+      timer: null
     };
 
-    let timer = setInterval(() => {
+    /*
+    @TODO: tech debt
+    create component for countdown:
+    <Countdown startTime={} onFinish={} formatter={} />
+     */
+    this.state.timer = setInterval(() => {
       this.setState(prev => {
         if (prev.timeToRespawn == 0) {
-          clearInterval(timer);
+          clearInterval(this.state.timer);
           return {
            timeToRespawn: 0
           };
@@ -25,6 +31,9 @@ export default class HeroImage extends React.Component {
     }, 1000);
   }
 
+  componentWillUnmount() {
+    clearInterval(this.state.timer);
+  }
 
   render() {
     let heroId = this.props.heroId;

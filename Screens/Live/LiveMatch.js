@@ -4,7 +4,7 @@ import { Body, Button, Card, CardItem, Col, Container, Content, Footer, FooterTa
 import ItemImage from '../../Components/ItemImage';
 import HeroImage from '../../Components/HeroImage';
 import Layout from '../Layout';
-import moment from 'moment';
+import Countup from '../../Components/Countup';
 
 export default class LiveMatch extends React.Component {
   constructor(props) {
@@ -143,10 +143,12 @@ function LiveMatchTeam({radiant, dire}) {
 function GameSummary({scoreboard}) {
   if (!scoreboard) return null;
 
-  let gameMin = (scoreboard.duration / 60).toFixed(0);
-  let gameSec = (scoreboard.duration % 60).toFixed(0);
-  gameSec = ("0" + gameSec).slice(-2);
-  let gameTime = `${gameMin}:${gameSec}`;
+  let timeFormatter = (time) => {
+    let gameMin = (time / 60).toFixed(0);
+    let gameSec = (time % 60).toFixed(0);
+    gameSec = ("0" + gameSec).slice(-2);
+    return  `${gameMin}:${gameSec}`;
+  };
   let radiantScore = scoreboard.radiant.score;
   let direScore = scoreboard.dire.score;
   let score = `${radiantScore} - ${direScore}`;
@@ -155,7 +157,7 @@ function GameSummary({scoreboard}) {
     <CardItem>
       <Body>
       <H3 style={styles.gameScore}>{score}</H3>
-      <Text style={styles.gameTime}>{gameTime}</Text>
+      <Countup style={styles.gameTime} initialTime={scoreboard.duration} formatter={timeFormatter} />
       </Body>
     </CardItem>
   );

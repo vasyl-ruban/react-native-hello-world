@@ -5,6 +5,7 @@ import ItemImage from '../../Components/ItemImage';
 import HeroImage from '../../Components/HeroImage';
 import Layout from '../Layout';
 import moment from 'moment';
+import Countup from '../../Components/Countup';
 
 export default class LiveMatches extends React.Component {
   constructor(props) {
@@ -14,7 +15,6 @@ export default class LiveMatches extends React.Component {
       isReloading: false,
       matches: []
     };
-
 
     this.loadData = this.loadData.bind(this);
 
@@ -60,6 +60,10 @@ export default class LiveMatches extends React.Component {
   }
 }
 
+/*
+@TODO: tech debt
+figure out duplicate components with LiveMatch screen and move them to the separate component
+ */
 function LiveMatchItem({match, navigate}) {
   let radiantPlayers = match.players.filter((player) => player.team == 0);
   let direPlayers = match.players.filter((player) => player.team == 1);
@@ -124,10 +128,13 @@ function LiveMatchTeam({radiant, dire}) {
 function GameSummary({scoreboard}) {
   if (!scoreboard) return null;
 
-  let gameMin = (scoreboard.duration / 60).toFixed(0);
-  let gameSec = (scoreboard.duration % 60).toFixed(0);
-  gameSec = ("0" + gameSec).slice(-2);
-  let gameTime = `${gameMin}:${gameSec}`;
+  let timeFormatter = (time) => {
+    let gameMin = (time / 60).toFixed(0);
+    let gameSec = (time % 60).toFixed(0);
+    gameSec = ("0" + gameSec).slice(-2);
+    return  `${gameMin}:${gameSec}`;
+  };
+
   let radiantScore = scoreboard.radiant.score;
   let direScore = scoreboard.dire.score;
   let score = `${radiantScore} - ${direScore}`;
@@ -136,7 +143,7 @@ function GameSummary({scoreboard}) {
     <CardItem>
       <Body>
       <H3 style={styles.gameScore}>{score}</H3>
-      <Text style={styles.gameTime}>{gameTime}</Text>
+      <Countup style={styles.gameTime} initialTime={scoreboard.duration} formatter={timeFormatter} />
       </Body>
     </CardItem>
   );
