@@ -76,7 +76,7 @@ function MatchDetails({match}) {
             <Text>Radiant</Text>
           </ListItem>
           {radiantPlayers.map((player) =>
-            <PlayerInfo player={player} key={player.account_id} />
+            <PlayerOverviewRow player={player} key={player.account_id} />
           )}
 
           <ListItem itemDivider>
@@ -84,15 +84,15 @@ function MatchDetails({match}) {
           </ListItem>
 
           {direPlayers.map((player) =>
-            <PlayerInfo player={player} key={player.account_id} />
+            <PlayerOverviewRow player={player} key={player.account_id} />
           )}
         </Tab>
-        <Tab heading={ <TabHeading><Text>Overview</Text></TabHeading> }>
+        <Tab heading={ <TabHeading><Text>Farm</Text></TabHeading> }>
           <ListItem itemDivider>
             <Text>Radiant</Text>
           </ListItem>
           {radiantPlayers.map((player) =>
-            <PlayerOverviewRow player={player} key={player.account_id} />
+            <PlayerFarmRow player={player} key={player.account_id} />
           )}
 
           <ListItem itemDivider>
@@ -100,10 +100,10 @@ function MatchDetails({match}) {
           </ListItem>
 
           {direPlayers.map((player) =>
-            <PlayerOverviewRow player={player} key={player.account_id} />
+            <PlayerFarmRow player={player} key={player.account_id} />
           )}
         </Tab>
-        <Tab heading={ <TabHeading><Text>Item</Text></TabHeading> }>
+        <Tab heading={ <TabHeading><Text>Items</Text></TabHeading> }>
           <ListItem itemDivider>
             <Text>Radiant</Text>
           </ListItem>
@@ -163,87 +163,47 @@ function GameSummary({scoreboard}) {
   );
 }
 
-function PlayerInfo({player}) {
-  return (
-    <ListItem style={{marginLeft: 0}}>
-      <Grid>
-        <Col>
-          <Row>
-            <HeroImage heroId={player.hero_id} timeToRespawn={player.respawn_timer} />
-          </Row>
-          <Row>
-            <Text>{player.kills}/{player.death}/{player.assists}</Text>
-            <Text note>K/D/A</Text>
-          </Row>
-        </Col>
-        <Col>
-          <Row>
-            <ItemImage itemId={player.item0} small />
-            <ItemImage itemId={player.item1} small />
-            <ItemImage itemId={player.item2} small />
-          </Row>
-          <Row>
-            <ItemImage itemId={player.item3} small />
-            <ItemImage itemId={player.item4} small />
-            <ItemImage itemId={player.item5} small />
-          </Row>
-        </Col>
-      </Grid>
-      {/*<Left>*/}
-        {/*<Grid>*/}
-          {/*<Row>*/}
-            {/*<HeroImage heroId={player.hero_id} />*/}
-          {/*</Row>*/}
-          {/*<Row>*/}
-            {/*<Col>*/}
-              {/*<Text>{player.kills}/{player.death}/{player.assists}</Text>*/}
-              {/*<Text note>K/D/A</Text>*/}
-            {/*</Col>*/}
-          {/*</Row>*/}
-        {/*</Grid>*/}
-      {/*</Left>*/}
-      {/*<Body>*/}
-        {/*<Grid>*/}
-          {/*<Row>*/}
-            {/*<Col>*/}
-            {/*<Text>{player.level} lvl</Text>*/}
-            {/*<Text note>{player.gold} gold</Text>*/}
-            {/*</Col>*/}
-            {/*<Col>*/}
-            {/*<Row>*/}
-            {/*<ItemImage itemId={player.item0} />*/}
-            {/*<ItemImage itemId={player.item1} />*/}
-            {/*<ItemImage itemId={player.item2} />*/}
-            {/*<ItemImage itemId={player.item3} />*/}
-            {/*<ItemImage itemId={player.item4} />*/}
-            {/*<ItemImage itemId={player.item5} />*/}
-            {/*</Row>*/}
-            {/*</Col>*/}
-            {/*</Row>*/}
-        {/*</Grid>*/}
-      {/*</Body>*/}
-    </ListItem>
-  );
-}
-
 function PlayerOverviewRow({player}) {
   let netWorth = (player.gold_spent / 1000).toFixed(1) + 'k';
   return (
     <ListItem style={{marginLeft: 0}}>
       <Left>
         <HeroImage heroId={player.hero_id} />
+        <Text>{player.level} lvl</Text>
       </Left>
       <Body>
         <Grid>
           <Col>
-            <Text>{player.level} lvl</Text>
-            <Text note>{player.gold} gold</Text>
-          </Col>
-          <Col>
             <Text>{player.kills}/{player.death}/{player.assists}</Text>
             <Text note>K/D/A</Text>
           </Col>
+          <Col>
+            <Text>{player.net_worth}</Text>
+            <Text note>net worth</Text>
+          </Col>
         </Grid>
+      </Body>
+    </ListItem>
+  );
+}
+
+function PlayerFarmRow({player}) {
+  return (
+    <ListItem key={player.hero_id} style={{marginLeft: 0}}>
+      <Left>
+        <HeroImage heroId={player.hero_id}/>
+      </Left>
+      <Body>
+      <Grid>
+        <Col>
+          <Text>{player.last_hits}/{player.denies}</Text>
+          <Text note>LH/D</Text>
+        </Col>
+        <Col>
+          <Text>{player.gold_per_min}/{player.xp_per_min}</Text>
+          <Text note>GPM/XPM</Text>
+        </Col>
+      </Grid>
       </Body>
     </ListItem>
   );
@@ -254,6 +214,7 @@ function PlayerItemRow({player}) {
     <ListItem style={{marginLeft: 0}}>
       <Left>
         <HeroImage heroId={player.hero_id} />
+        <Text>{player.gold} gold</Text>
       </Left>
       <Body>
       <Grid>
